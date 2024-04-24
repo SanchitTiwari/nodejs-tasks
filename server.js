@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const md5 = require('md5');
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://127.0.0.1/';
 const usersData = [
     {
         firstName: 'sam',
@@ -58,7 +58,7 @@ client.connect(function(err) {
     const db = client.db(dbName);
 
     const usersCollection = db.collection('Users');
-
+    // Adding whole object array into mongodb collection
     usersCollection.insertMany(usersData, function(err, result) {
         if (err) {
             console.error("Failed to insert users:", err);
@@ -73,7 +73,6 @@ client.connect(function(err) {
             dob: user.dob,
             Mobile_no: user.mobileNo
         }));
-
         userProfileCollection.insertMany(userProfileData, function(err, result) {
             if (err) {
                 console.error("Failed to insert users' profiles:", err);
