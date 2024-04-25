@@ -15,11 +15,11 @@ MongoClient.connect(url, function(err, client) {
     }
     console.log("Connected successfully to MongoDB");
 
-    const db = client.db(dbName);
-    const usersCollection = db.collection('Users');
-
+    // To get average age of the users in the database
+const db = client.db(dbName);
+const usersCollection = db.collection('Users');
     app.get('/averageAge', (req, res) => {
-        usersCollection.aggregate([
+        usersCollection.aggregate([ // first we calculate age as we have stored date of birth of the users 
             {
                 $project: {
                     age: {
@@ -51,8 +51,8 @@ MongoClient.connect(url, function(err, client) {
             res.json({ averageAge: result[0].averageAge });
         });
     });
-
-    app.get('/deleteOldUsers', (req, res) => {
+    // Deleting users whose age is greater than 25
+app.get('/deleteOldUsers', (req, res) => {
         usersCollection.find({ dob: { $lt: new Date(new Date() - 25 * 31557600000) } }).toArray((err, users) => {
             if (err) {
                 console.error("Failed to find old users:", err);
