@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const md5 = require('md5');
-const url = 'mongodb://127.0.0.1/';
+const url = 'mongodb+srv://tiwarisanchit47:sanchit@cluster0.ysplig4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const usersData = [
     {
         firstName: 'sam',
